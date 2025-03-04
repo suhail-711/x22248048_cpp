@@ -3,9 +3,11 @@ from. models import CategoryDB , BooksDB
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 from django.utils.datastructures import MultiValueDictKeyError
+from bookshop_UI.models import CustomerQuery
 
 def index_page(request):
-    return render(request,"index.html")
+    data = CustomerQuery.objects.all
+    return render(request,"index.html",{'data':data})
 
 def add_category(request):
     return render(request,"add_category.html")
@@ -104,6 +106,7 @@ def delete_books(request,book_id):
     x.delete()
     messages.info(request,"Book Deleted.!!")
     return redirect(view_books)
+
 
 
 

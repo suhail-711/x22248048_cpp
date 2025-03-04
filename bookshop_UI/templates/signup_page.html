@@ -22,24 +22,34 @@
         <div class="box-2">
             <div class="login-form-container">
                 <h1>Login Form</h1>
-                <input type="text" placeholder="Username" class="input-field">
+                <form method="post" action="{% url 'user_login' %}">
+                    {% csrf_token %}
+                <input type="text" placeholder="Username" class="input-field" name="username">
                 <br><br>
-                <input type="password" placeholder="Password" class="input-field">
+                <input type="password" placeholder="Password" class="input-field" name="password">
                 <br><br>
-                <button class="login-button" type="button">Login</button>
+                <button class="login-button" type="submit">Login</button>
+            </form>
             </div>
   
   
   <!--Create Container for Signup form-->
         <div class="signup-form-container">
             <h1>Sign Up Form</h1>
-            <input type="text" placeholder="Username" class="input-field">
+                       
+            <form method="post"  action="{% url 'save_account' %}" name="signup_form" onsubmit="return ValidatingFn()">
+                {% csrf_token %}
+
+            <input type="text" placeholder="Username" class="input-field" name="name" required>
             <br><br>
-            <input type="email" placeholder="Email" class="input-field">
+            <input type="email" placeholder="Email" class="input-field" name="email" required>
             <br><br>
-            <input type="password" placeholder="Password" class="input-field">
+            <input type="password" placeholder="Password" class="input-field" name="password1" required>
             <br><br>
-            <button class="signup-button" type="button">Sign Up</button>
+            <input type="password" placeholder="Confirm Password" class="input-field" name="password2" required>
+            <br><br>
+            <button class="signup-button" type="submit">Sign Up</button>
+        </form>
         </div>
   
         </div>
@@ -206,5 +216,48 @@ function login()
 
 }
         </script>
+
+<script>
+    function ValidatingFn(){
+     x = document.signup_form.password1.value;
+     y = document.signup_form.password2.value;
+           if(x.length<8){
+               alert("Password required at least 8 characters")
+               return false
+          }
+          else if(x == y){
+               return true
+               }
+          else{
+               alert("Password does not match!!")
+               return false
+               }
+
+}
+</script>
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+   {% for i in messages %}
+       {% if i.tags == 'warning' %}
+           <script>
+               swal('{{i}}', '', 'warning')
+           </script>
+       {% elif i.tags == 'error' %}
+           <script>
+               swal('{{i}}', '', 'error')
+           </script>
+       {% elif i.tags == 'info' %}
+           <script>
+               swal('{{i}}', '', 'info')
+           </script>
+       {% else %}
+           <script>
+               swal('{{i}}', '', 'success')
+           </script>
+       {% endif %}
+   {% endfor %}
+{% endif %}
 </body>
 </html>

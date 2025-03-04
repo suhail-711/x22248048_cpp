@@ -166,14 +166,14 @@
     				<p class="price"><span style="color:red">&#8364 {{book.price}}</span></p>
     				<p>{{book.description}}</p>
 
-                   <form  method="post" action="#">
+                   <form  method="post" action="{% url 'save_cart' %}">
                       {% csrf_token %}
                       <p style="color:red;">Quantity</p>
                       <input type="number" min="1" max="20" name="quantity" id="quantity" style="width:150px;" value="0" required>
                       <p style="color:red;">Total</p>
                       <input type="text" name="total" id="total" style="width:150px;">
                       <input type="hidden" name="price" id="price" value="{{book.price}}">
-                      <input type="hidden" name="user" value="{{request.session.Name}}" readonly>
+                      <input type="hidden" name="user" value="{{request.session.name}}" readonly>
                       <input type="hidden" name="bookname" value="{{book.name}}">
                       <p><button type="submit" class="btn btn-success">Add to Cart</button></p>
                    </form>

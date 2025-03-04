@@ -46,12 +46,15 @@
                         </li>
 
                 
-                         <li class="nav-item">
-                           <a class="nav-link" href="{% url 'signup_page' %}">Welcome, <span style="color:blue;"></span>/Logout</a>
-                        </li>
+                        {% if request.session.name %}
                         <li class="nav-item">
-                           <a class="nav-link" href="#"></a>
-                        </li>
+                          <a class="nav-link" href="{% url 'user_logout' %}">Welcome, <span style="color:blue;">{{request.session.name}}</span>/Logout</a>
+                       </li>
+                       {% else %}
+                       <li class="nav-item">
+                          <a class="nav-link" href="{% url 'user_login' %}">Login</a>
+                       </li>
+                       {% endif %}
                        
                         <li class="nav-item">
                            <a class="nav-link" href="{% url 'cart' %}">
@@ -113,7 +116,6 @@
                           <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">More </span><span class="caret"></span></a>
                            <ul class="dropdown-menu">
                               <li><a href="{% url 'about' %}">About</a></li>
-                              <li><a href="#">Delete Account</a></li>
                            </ul>
                         </li>
                      </ul>
@@ -145,7 +147,7 @@
                                    " Knowing I lov'd my books, he furnish'd me From mine own library with volumes that I prize above my dukedom. " - William Shakespeare.
                                  </i></b></p>
                                  <div class="btn-box">
-                                    <a href="#" class="btn1">
+                                    <a href="{% url 'products_page' %}"class="btn1">
                                     Shop Now
                                     </a>
                                  </div>
@@ -170,7 +172,7 @@
                                    " One glance at a book and you hear the voice of another person, perhaps someone dead for 1,000 years. To read is to voyage through time. " – Carl Sagan
                                   </i></b></p>
                                  <div class="btn-box">
-                                    <a href="#" class="btn1">
+                                    <a href="{% url 'products_page' %}" class="btn1">
                                     Shop Now
                                     </a>
                                  </div>
@@ -195,7 +197,7 @@
                                     " When I look back, I am so impressed again with the life-giving power of literature. If I were a young person today, trying to gain a sense of myself in the world, I would do that again by reading, just as I did when I was young." – Maya Angelou
                                  </i></b></p>
                                  <div class="btn-box">
-                                    <a href="#" class="btn1">
+                                    <a href="{% url 'products_page' %}" class="btn1">
                                     Shop Now
                                     </a>
                                  </div>
@@ -823,7 +825,7 @@
       <!-- end product section -->
 
       <!-- subscribe section -->
-      <section class="subscribe_section">
+      <!-- <section class="subscribe_section">
          <div class="container-fuild">
             <div class="box">
                <div class="row">
@@ -844,12 +846,13 @@
                </div>
             </div>
          </div>
-      </section>
+      </section> -->
       <!-- end subscribe section -->
       <!-- client section -->
       <section class="client_section layout_padding">
          <div class="container">
-            <div class="heading_container heading_center">
+            <img src="{% static 'newfolder/images/Bookshop_image.jpeg' %}" alt="#" style="width: 1200px;height: 550px;">
+            <!-- <div class="heading_container heading_center">
                <h2>
                   Customer's Testimonial
                </h2>
@@ -933,7 +936,7 @@
                   <span class="sr-only">Next</span>
                   </a>
                </div>
-            </div>
+            </div> -->
          </div>
       </section>
       <!-- end client section -->
@@ -961,9 +964,9 @@
                      <div class="widget_menu">
                         <h3>Menu</h3>
                         <ul>
-                           <li><a href="#">Home</a></li>
-                           <li><a href="#">About</a></li>
-                           <li><a href="#">Contact</a></li>
+                           <li><a href="{% url 'home' %}">Home</a></li>
+                           <li><a href="{% url 'about' %}">About</a></li>
+                           <li><a href="{% url 'contact' %}">Contact</a></li>
                         </ul>
                      </div>
                   </div>
@@ -971,9 +974,9 @@
                      <div class="widget_menu">
                         <h3>Account</h3>
                         <ul>
-                           <li><a href="#">Login</a></li>
-                           <li><a href="#">Register</a></li>
-                           <li><a href="#">Shopping</a></li>
+                           <li><a href="{% url 'user_login' %}">Login</a></li>
+                           <li><a href="{% url 'user_login' %}">Register</a></li>
+                           <li><a href="{% url 'products_page' %}">Shopping</a></li>
                         </ul>
                      </div>
                   </div>
@@ -986,7 +989,7 @@
                           <h3>Shop with us</h3>
                         </div>
                         <div class="form_sub">
-                           <button class="btn btn-outline-danger btn-lg">SHOP NOW</button>
+                           <a href="{% url 'products_page' %}"> <button class="btn btn-outline-danger btn-lg">SHOP NOW</button></a>
                         </div>
                      </div>
                   </div>
@@ -997,7 +1000,7 @@
       </footer>
       <!-- footer end -->
       <div class="cpy_">
-         <p class="mx-auto">© 2024 All Rights Reserved By <a href="#">The Bookshelf Team</a><br>
+         <p class="mx-auto">© 2025 All Rights Reserved By <a href="#">The Bookshelf Team</a><br>
 
 <!--            Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>-->
          </p>
