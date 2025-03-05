@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from. models import CategoryDB , BooksDB
+from. models import CategoryDB , BooksDB, BackendUserDB
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 from django.utils.datastructures import MultiValueDictKeyError
@@ -106,7 +106,44 @@ def delete_books(request,book_id):
     x.delete()
     messages.info(request,"Book Deleted.!!")
     return redirect(view_books)
+def signup(request):
+    return render(request,"signup_page.html")
 
+
+def save_backendadmin(request):
+
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        password = request.POST.get('password1')
+
+        obj = BackendUserDB(name=name, email=email, password=password)
+        obj.save()
+        return redirect(signup_page)
+
+def signin_page(request):
+    return render(request,"sign_in.html")
+
+def signin_admin(request):
+    if request.method == "POST":
+        username  = request.POST.get('username')
+        password = request.POST.get('password')
+        request.session['name'] = username
+        request.session['password'] =password
+        if BackendUserDB.objects.filter(name=username,password=password).exists():  # checking username and password exist in the db
+            messages.success(request, "WELCOME.!")
+            return redirect(index_page)
+        else:
+            messages.error(request, "User not found.!")
+            return redirect(signin_page)
+    else:
+        return redirect(signin_page)
+
+def user_logout(request):
+    del request.session['name']
+    del request.session['password']
+    messages.success(request, "You have been signed out.")
+    return redirect(signin_page)
 
 
 

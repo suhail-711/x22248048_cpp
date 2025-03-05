@@ -65,7 +65,7 @@ def customer_queries(request):
         return redirect(contact_us)
 
 def signup_page(request):
-    return render(request, "signup_page.html")
+    return render(request,"signup_page.html")
 
 def save_useraccount(request):
    

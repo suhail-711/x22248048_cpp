@@ -15,7 +15,12 @@ urlpatterns =[
     path('view_books/',views.view_books,name="view_books"),
     path('edit_books/<int:book_id>',views.edit_books,name="edit_books"),
     path('update_books/<int:book_id>',views.update_books,name="update_books"),
-    path('delete_books/<int:book_id>',views.delete_books,name="delete_books")
+    path('delete_books/<int:book_id>',views.delete_books,name="delete_books"),
+    path('signup/',views.signup,name="signup"),
+    path('save_backendadmin/',views.save_backendadmin,name="save_backendadmin"),
+    path('signin/',views.signin_page,name="signin"),
+    path('user_signin/',views.signin_admin,name="user_signin"),
+    path('user_logout/',views.user_logout,name="logout")
 
 
 ]
