@@ -24,7 +24,7 @@ from book_shop import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('backend/', include(backend.urls)),
-    path('webapp/',include(bookshop_UI.urls))
+    path('',include(bookshop_UI.urls))
     
 
 ]

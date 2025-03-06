@@ -119,7 +119,7 @@ def save_backendadmin(request):
 
         obj = BackendUserDB(name=name, email=email, password=password)
         obj.save()
-        return redirect(signup_page)
+        return redirect(signin_page)
 
 def signin_page(request):
     return render(request,"sign_in.html")

@@ -18,7 +18,7 @@ urlpatterns =[
     path('delete_books/<int:book_id>',views.delete_books,name="delete_books"),
     path('signup/',views.signup,name="signup"),
     path('save_backendadmin/',views.save_backendadmin,name="save_backendadmin"),
-    path('signin/',views.signin_page,name="signin"),
+    path('',views.signin_page,name="signin"),
     path('user_signin/',views.signin_admin,name="user_signin"),
     path('user_logout/',views.user_logout,name="logout")
 

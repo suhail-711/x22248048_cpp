@@ -64,8 +64,12 @@ def customer_queries(request):
         obj.save()
         return redirect(contact_us)
 
-def signup_page(request):
-    return render(request,"signup_page.html")
+# def signup_page(request):
+#     return render(request,"signup_page.html")
+
+
+def user_login_page(request):
+    return render(request,"user_login_page.html")
 
 def save_useraccount(request):
    
@@ -77,7 +81,7 @@ def save_useraccount(request):
         obj = UserAccount(name=name, email=email, password=password)
         obj.save()
         messages.success(request, "Success! Your account is now active.Please Login.. Happy shopping")
-        return redirect(signup_page)
+        return redirect(user_login_page)
 
 
 
@@ -92,15 +96,15 @@ def user_login(request):
             return redirect(home_page)
         else:
             messages.error(request, "User not found.!")
-            return redirect(signup_page)
+            return redirect(user_login_page)
     else:
-        return redirect(signup_page)
+        return redirect(user_login_page)
 
 def user_logout(request):
     del request.session['name']
     del request.session['password']
     messages.success(request, "You have been signed out.")
-    return redirect(signup_page)
+    return redirect(user_login_page)
 
 def save_cart(request):
     if request.method == "POST":
